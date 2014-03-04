@@ -8,7 +8,7 @@ angular.module('GreenListApp.directives', []).
 			elm.text(version);
 		};
 	}]).
-	directive('autocomplete', function() {
+	directive('autocomplete', ['names', function(names) {
 		return {
 			restrict: "E",
 			replace: true,
@@ -20,8 +20,8 @@ angular.module('GreenListApp.directives', []).
 			link: function(scope, element) {
 			
 				$(element).autocomplete({
-					source: scope.variants
+					source: names//scope.variants
 				});
 			}
 		};
-	});
+	}]);

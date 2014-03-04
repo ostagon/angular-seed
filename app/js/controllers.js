@@ -9,6 +9,6 @@ angular.module('GreenListApp.controllers', []).
 	.controller('MyCtrl2', [function() {
 
 	}])
-	.controller('AutocompleteCtrl', [function($scope) {
-		$scope.names = ["Аристид", "Фенозон", "Анигар", "Протогорк"];
+	.controller('AutocompleteCtrl', [function() {
+		//$scope.names = ["РђСЂРёСЃС‚РёРґ", "Р¤РµРЅРѕР·РѕРЅ", "РђРЅРёРіР°СЂ", "РџСЂРѕС‚РѕРіРѕСЂРє"];
 	}]);
