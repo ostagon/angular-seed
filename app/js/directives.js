@@ -16,7 +16,7 @@ angular.module('GreenListApp.directives', []).
 				hint: "@",
 				variants: "="
 			},
-			templateUrl: "partials/autocompleteTemplate.html",
+			templateUrl: "templates/autocompleteTemplate.html",
 			link: function(scope, element) {
 			
 				$(element).autocomplete({

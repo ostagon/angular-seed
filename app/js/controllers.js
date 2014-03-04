@@ -11,4 +11,7 @@ angular.module('GreenListApp.controllers', []).
 	}])
 	.controller('AutocompleteCtrl', [function() {
 		//$scope.names = ["Аристид", "Фенозон", "Анигар", "Протогорк"];
-	}]);
+	}])
+	.controller('SimpleCtrl', function() {
+
+	});

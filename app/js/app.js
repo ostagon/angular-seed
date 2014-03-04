@@ -9,8 +9,9 @@ angular.module('GreenListApp', [
 	'GreenListApp.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-	$routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-	$routeProvider.when('/autocomplete', {templateUrl: 'partials/autocompleteView.html', controller: 'AutocompleteCtrl'});
+	$routeProvider.when('/view1', {templateUrl: 'views/partial1.html', controller: 'MyCtrl1'});
+	$routeProvider.when('/view2', {templateUrl: 'views/partial2.html', controller: 'MyCtrl2'});
+	$routeProvider.when('/autocomplete', {templateUrl: 'views/autocompleteView.html', controller: 'AutocompleteCtrl'});
+	$routeProvider.when('/simple', {templateUrl: 'views/simpleView.html', controller: 'SimpleCtrl'});
 	$routeProvider.otherwise({redirectTo: '/view1'});
 }]);
