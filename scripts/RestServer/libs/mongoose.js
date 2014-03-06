@@ -29,18 +29,18 @@ var Schema = mongoose.Schema;
 
 var Item = new Schema({
 	name: { type: String, required: true},
-	count: { type: Integer, required: true}
+	count: { type: Number, required: true}
 });
 
-/**/
+/*
 Item.path('name').validate( function(value) {
-	return value.length > 0 && value.length < 128;
+	return true;//value.length > 0 && value.length < 128;
 });
 
 Item.path('count').validate( function(value) {
-	return value > 0 && value < 1000000;
+	return true;//value > 0 && value < 1000000;
 });
-/**/
+*/
 
 var ItemModel = mongoose.model('Item', Item);
 

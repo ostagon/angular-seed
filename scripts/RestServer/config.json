@@ -1,7 +1,7 @@
 {
 	"port": 1337,
 	"mongoose": {
-		"uri": "mongodb://localhost:27017/greenlist",
+		"uri": "mongodb://epruizhw0117:27017/greenlist",
 		"options": {
 			"user": "user",
 			"pass": "user"
