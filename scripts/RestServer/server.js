@@ -7,8 +7,8 @@ var mongoose 	= require('./libs/mongoose');
 
 var app = express();
 
-app.use(express.logger('dev'));    // выводим все запросы со статусами в консоль
-app.use(express.json());     // стандартный модуль, для парсинга JSON в запросах
+app.use(express.logger('dev'));   	 // выводим все запросы со статусами в консоль
+app.use(express.json());         	 // стандартный модуль, для парсинга JSON в запросах
 app.use(express.urlencoded());
 app.use(require('formidable')());    // mimeencoded
 //app.use(express.methodOverride()); // поддержка put и delete
@@ -27,20 +27,27 @@ app.use( function(req, res, next) {
 });
 */
 
-app.use( function(err, req, res, next) {
+app.use( function (err, req, res, next) {
 	res.status(err.status || 500);
 	res.send({ error: err.message});
 	return;
 });
 
 // error example
-app.get('/error', function(req, res, next) {
+app.get('/error', function (req, res, next) {
 	next(new Error("Random error"));
 });
 
 // rest api
 app.get('/restapi', function (req, res) {
     res.send('API is running');
+});
+
+// add headers to every rest api response (fix with CORS)
+app.get('/restapi/*', function (req, res, next) {
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.header('Access-Control-Allow-Origin', '*');
+	next();
 });
 
 // *** crud begin ***

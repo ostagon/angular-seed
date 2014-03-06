@@ -1,0 +1,14 @@
+<table id="greenListTable" width="100%">
+	<tr>
+		<th>Название</th>
+		<th>Кол-во</th>
+		<th></th>		
+	</tr>
+	<tr ng-repeat="item in items">
+		<td>{{ item.name }}</td>
+		<td>{{ item.count }}</td>
+		<td>
+			<button ng-click="deleteItem()">Удалить</button>
+		</td>
+	</tr>
+</table>

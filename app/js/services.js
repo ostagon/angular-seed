@@ -4,6 +4,13 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-angular.module('GreenListApp.services', []).
-	value('version', '0.11').
-	value('names', ["Аристид", "Фенозон", "Анигар", "Протогорк"]);
+angular.module('GreenListApp.services', ['ngResource']).
+	
+value('version', '0.11').
+value('names', ["Аристид", "Фенозон", "Анигар", "Протогорк"]).
+
+factory('Items', ['$resource', function($resource) {
+	return $resource('http://epruizhw0117:1337/restapi/items', {}, {
+		list: {method: 'GET', isArray: true}
+	});
+}]);
