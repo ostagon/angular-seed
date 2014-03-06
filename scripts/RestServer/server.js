@@ -44,11 +44,14 @@ app.get('/restapi', function (req, res) {
 });
 
 // add headers to every rest api response (fix with CORS)
-app.get('/restapi/*', function (req, res, next) {
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+var cors = function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	next();
-});
+};
+
+app.all('/restapi/*', cors);
 
 // *** crud begin ***
 // crud: read: get all items 

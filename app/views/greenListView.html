@@ -1,14 +1,28 @@
-<table id="greenListTable" width="100%">
+<p>Список покупок</p>
+<hr/>
+<table class="items" width="100%">
 	<tr>
 		<th>Название</th>
 		<th>Кол-во</th>
 		<th></th>		
 	</tr>
-	<tr ng-repeat="item in items">
+	<tr ng-repeat="item in items | filter:currentItem">
 		<td>{{ item.name }}</td>
 		<td>{{ item.count }}</td>
 		<td>
-			<button ng-click="deleteItem()">Удалить</button>
+			<button ng-click="deleteItem()" title="Удалить элемент">X</button>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" ng-model="currentItem.name" placeholder="Фильтровать по имени..." />
+		</td>
+		<td>
+			<input type="text" ng-model="currentItem.count" placeholder="Фильтровать по кол-ву..." />
+		</td>
+		<td>
+			<button ng-click="createItem()" title="Создать новый элемент">+</button>
 		</td>
 	</tr>
 </table>
+<hr/>
