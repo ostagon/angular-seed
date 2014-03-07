@@ -45,10 +45,27 @@ table.items tr th {
 }
 
 table.items tr td {
-	padding-right: 10px;
+	padding-left: 2px;	
 }
 
 table.items tr td input[type="text"] {
 	width: 100%;
 	padding-left: 2px;
+}
+
+table.items tr:nth-child(even) td {
+	background-color: rgba(51, 255, 153, 0.3);/*lavenderblush;*/	
+}
+
+table.items tr td.filter {
+	padding-left: 0px;
+	padding-right: 10px;
+}
+
+.sort {
+	cursor: pointer;
+}
+
+.clear-color, tr.clear-color td {
+	background-color: transparent !important;
 }

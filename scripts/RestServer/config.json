@@ -5,6 +5,7 @@
 		"options": {
 			"user": "user",
 			"pass": "user"
-		}
+		},
+		"dbs": ["greenlist", "red", "yellow", "violet", "silver"]
 	}
 }

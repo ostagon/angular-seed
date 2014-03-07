@@ -2,22 +2,23 @@
 <hr/>
 <table class="items" width="100%">
 	<tr>
-		<th>Название</th>
-		<th>Кол-во</th>
-		<th></th>		
+		<th class="sort" ng-click="sortBy('name')" title="Нажмите для сортировки по имени">Название</th>
+		<th class="sort" ng-click="sortBy('count')" title="Нажмите для сортировки по количеству">Кол-во</th>
+		<th></th>
 	</tr>
-	<tr ng-repeat="item in items | filter:currentItem">
+	<tr ng-repeat="item in items | filter:currentItem | orderBy:sortOrder()">
 		<td>{{ item.name }}</td>
 		<td>{{ item.count }}</td>
-		<td>
-			<button ng-click="deleteItem()" title="Удалить элемент">X</button>
+		<td class="clear-color">
+			<button ng-click="deleteItem(item._id)" title="Удалить элемент">X</button>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<input type="text" ng-model="currentItem.name" placeholder="Фильтровать по имени..." />
+	<tr class="clear-color">
+		<td class="filter">
+			<!-- <input type="text" ng-model="currentItem.name" placeholder="Фильтровать по имени..." /> -->
+			<input autocomplete ng-model="currentItem.name" hint="Фильтровать по имени..." variants="some" />
 		</td>
-		<td>
+		<td class="filter">
 			<input type="text" ng-model="currentItem.count" placeholder="Фильтровать по кол-ву..." />
 		</td>
 		<td>

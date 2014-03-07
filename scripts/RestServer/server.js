@@ -53,6 +53,18 @@ var cors = function (req, res, next) {
 
 app.all('/restapi/*', cors);
 
+// *** auth ***
+// auth: begin
+app.post('/restapi/auth', function (req, res) {
+	var auth = { 
+		db:   req.body.db,
+		user: req.body.user,
+		pass: req.body.pass
+	};	
+	
+});
+// auth: end
+
 // *** crud begin ***
 // crud: read: get all items 
 app.get('/restapi/items', function (req, res) {

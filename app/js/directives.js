@@ -10,18 +10,27 @@ angular.module('GreenListApp.directives', []).
 	}]).
 	directive('autocomplete', ['names', function(names) {
 		return {
-			restrict: "E",
+			restrict: "EA",
 			replace: true,
 			scope: {
 				hint: "@",
-				variants: "="
+				variants: "=",
+				ngModel: "="
 			},
 			templateUrl: "templates/autocompleteTemplate.html",
-			link: function(scope, element) {
-			
+			link: function(scope, element, attrs) {
+				
 				$(element).autocomplete({
-					source: names//scope.variants
-				});
+					source: names,
+					select: function(event, ui) {
+					
+						scope.$apply( function() {
+							if (scope.ngModel) {
+								scope.ngModel = ui.item.value;
+							}
+						});						
+					}
+				});				
 			}
 		};
 	}]);
