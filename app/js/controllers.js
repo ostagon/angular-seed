@@ -34,7 +34,7 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 	
 	// первая загрузка
 	updateList();
-	
+		
 	$scope.createItem = function() {
 		if($scope.currentItem) {
 			console.log($scope.currentItem);
@@ -83,6 +83,38 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 		}
 	};
 	
+	// paginate
+	
+	// номер текущей, c 1
+	$scope.pageNo = 1;
+	// кол-во на странице
+	$scope.pageSize = 10;
+	// кол-во страниц всего
+	$scope.pageNum = 1;
+	// кол-во элементов для пейджинга
+	$scope.pageElemsNum = 1;
+		
+	// подсчёт кол-ва страниц
+	$scope.countPageNum = function(total) {
+		$scope.pageElemsNum = total;
+		var count = total > 0 ? Math.ceil(total / $scope.pageSize) : 1;
+		if ($scope.pageNo > count) {
+			$scope.pageNo = count;
+		}
+		$scope.pageNum = count;
+		return count;
+	};
+	
+	// увеличить/уменьшить текущую страницу на 1
+	$scope.incPage = function(inc) {
+		if (inc) {
+			if ($scope.pageNo < $scope.pageNum)
+				$scope.pageNo++;
+		} else {
+			if ($scope.pageNo > 1)
+				$scope.pageNo--;
+		}		
+	};
 	
 }]);
 	

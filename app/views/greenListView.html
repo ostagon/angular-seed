@@ -6,7 +6,7 @@
 		<th class="sort" ng-click="sortBy('count')" title="Нажмите для сортировки по количеству">Кол-во</th>
 		<th></th>
 	</tr>
-	<tr ng-repeat="item in items | filter:currentItem | orderBy:sortOrder()">
+	<tr ng-repeat="item in filteredItems = (items | filter:currentItem | orderBy:sortOrder() | paginate:this:pageNo:pageSize)">
 		<td>{{ item.name }}</td>
 		<td>{{ item.count }}</td>
 		<td class="clear-color">
@@ -26,4 +26,8 @@
 		</td>
 	</tr>
 </table>
+<hr/>
+	<button ng-click="incPage(false)">-</button>
+	<span> {{ pageNo }} / {{ pageNum }}</span>
+	<button ng-click="incPage(true)">+</button>
 <hr/>
