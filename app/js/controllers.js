@@ -34,6 +34,7 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 	
 	// первая загрузка
 	updateList();
+	
 		
 	$scope.createItem = function() {
 		if($scope.currentItem) {
@@ -49,12 +50,21 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 		}
 	};
 	
+	$scope.updateItem = function(currentItem) {
+		var id = currentItem._id;
+		Items.update({ itemId: id, name: currentItem.name, count: currentItem.count}, function(item) {
+			console.log("Update item with id = " + id);
+			updateList();
+		});
+	}
+	
 	$scope.deleteItem = function(id) {
 		Items.remove({ itemId: id}, function(item) {
 			console.log("Delete item with id = " + id);
 			updateList();
 		});
 	};
+	
 	
 	function updateList() {
 		$scope.items = Items.list();

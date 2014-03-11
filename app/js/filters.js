@@ -11,7 +11,9 @@ angular.module('GreenListApp.filters', []).
 
 	filter('paginate', function() {
 		return function(input, scope, selectedPage, pageSize) {
-			var count = scope.countPageNum(input.length);
+			if (scope) {
+				scope.countPageNum(input.length);
+			}
 			
 			var start = (selectedPage - 1) * pageSize;
 			return input.slice(start, start + pageSize);

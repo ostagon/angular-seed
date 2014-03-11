@@ -7,8 +7,12 @@
 		<th></th>
 	</tr>
 	<tr ng-repeat="item in filteredItems = (items | filter:currentItem | orderBy:sortOrder() | paginate:this:pageNo:pageSize)">
-		<td>{{ item.name }}</td>
-		<td>{{ item.count }}</td>
+		<td>
+			<span edit item="item" field="name" save="updateItem(item)" />
+		</td>
+		<td>
+			<span edit item="item" field="count" save="updateItem(item)" />
+		</td>
 		<td class="clear-color">
 			<button ng-click="deleteItem(item._id)" title="Удалить элемент">X</button>
 		</td>

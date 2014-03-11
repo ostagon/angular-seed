@@ -44,6 +44,10 @@ table.items tr th {
 	text-align: left;
 }
 
+table.items tr th:first-child {
+	width: 50%;
+}
+
 table.items tr td {
 	padding-left: 2px;	
 }
