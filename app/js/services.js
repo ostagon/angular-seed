@@ -4,7 +4,7 @@
 
 angular.module('GreenListApp.services', ['ngResource']).
 	
-value('version', '0.12').
+value('version', '0.15').
 value('names', ["Аристид", "Фенозон", "Анигар", "Протогорк"]).
 
 factory('Items', ['$resource', function($resource) {
