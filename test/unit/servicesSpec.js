@@ -16,6 +16,7 @@ describe('service', function() {
   describe('names', function() {
 	
 	beforeEach(function() {
+		// custom matcher
 		jasmine.addMatchers({
 			toBeArrayOfNames: function() {
 				return {
@@ -57,6 +58,28 @@ describe('service', function() {
 	it('should return if array with names not null and all names are strings and begin with upper letter', inject(function(names) {
 		expect(names).toBeArrayOfNames();
 	}));
+  });
+  
+  // test green list items service
+  describe('items', function() {
+	// test that service is up
+	it('should return a confirm message, that the service on http://epruizhw0117:1337/restapi is up', inject(function(RestAPI, $httpBackend) {
+		var confirmMessage = { status: "API is running" };
+		$httpBackend.when('GET', 'http://epruizhw0117:1337/restapi').respond(confirmMessage);
+		
+		var message;
+		var promise = RestAPI.get().$promise;
+		
+		promise.then(function(msg) {
+			message = msg;			
+		});
+		
+		expect(message).toBeUndefined();
+		$httpBackend.flush();
+		
+		expect(message.status).toEqual(confirmMessage.status);
+	}));
+	
   });
   
 });

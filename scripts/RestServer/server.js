@@ -40,7 +40,7 @@ app.get('/error', function (req, res, next) {
 
 // rest api
 app.get('/restapi', function (req, res) {
-    res.send('API is running');
+    res.send({ status: 'API is running'});
 });
 
 // add headers to every rest api response (fix with CORS)
