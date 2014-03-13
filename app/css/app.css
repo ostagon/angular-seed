@@ -48,11 +48,20 @@ table.items tr th:first-child {
 	width: 50%;
 }
 
+table.items tr th:last-child {
+	width: 10%;
+}
+
 table.items tr td {
 	padding-left: 2px;	
 }
 
 table.items tr td input[type="text"] {
+	width: 80%;
+	padding-left: 2px;
+}
+
+table.items tr td.filter input[type="text"] {
 	width: 100%;
 	padding-left: 2px;
 }
