@@ -28,7 +28,7 @@ controller('GreenListCtrl', ['$scope', 'Items', 'limits', function($scope, Items
 	// первая загрузка
 	updateList();
 	
-	// *** CRUD ***
+	// *** CRUD with checks ***
 		
 	$scope.createItem = function() {
 		if($scope.currentItem) {
@@ -71,13 +71,32 @@ controller('GreenListCtrl', ['$scope', 'Items', 'limits', function($scope, Items
 	}
 	
 	$scope.deleteItem = function(id) {
-		Items.remove({ itemId: id}, function(item) {
-			console.log("Delete item with id = " + id);
-			updateList();
+		
+		$("<span>Удалить элемент?</span>").dialog({
+			resizable: false,
+			modal: true,
+			title: "Удаление",
+			//height: 150,
+			//width: 400,
+			buttons: {
+				"Yes": function () {
+					$(this).dialog('close');
+					
+					Items.remove({ itemId: id}, function(item) {
+						console.log("Delete item with id = " + id);
+						updateList();
+					});
+				},
+				"No": function () {
+					$(this).dialog('close');
+					return;
+				}
+			}
 		});
+		
 	};
 	
-	
+	// обновить список
 	function updateList() {
 		$scope.items = Items.list();
 		$scope.currentItem.name = "";
