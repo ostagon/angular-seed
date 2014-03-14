@@ -32,24 +32,42 @@ controller('GreenListCtrl', ['$scope', 'Items', 'limits', function($scope, Items
 		
 	$scope.createItem = function() {
 		if($scope.currentItem) {
-			console.log($scope.currentItem);
-			Items.create({ name: $scope.currentItem.name, count: $scope.currentItem.count}).$promise.then( 
-					function (item) {
-						updateList();
-					},
-					function (error) {
-						console.log("Error with create");
-					}
-				);
+			var valid = validateItem($scope.currentItem);
+			
+			if (valid) {
+				console.log("Create new item");
+				Items.create({ name: $scope.currentItem.name, count: $scope.currentItem.count}).$promise.then( 
+						function (item) {
+							updateList();
+						},
+						function (error) {
+							console.log("Error with create");
+							alert("Ошибка при создании элемента на сервере!");
+						}
+					);
+			} else {
+				alert("Проверьте правильность введённых данных!");
+			}
+			
+			return valid;
 		}
+		return false;
 	};
 	
 	$scope.updateItem = function(currentItem) {
-		var id = currentItem._id;
-		Items.update({ itemId: id, name: currentItem.name, count: currentItem.count}, function(item) {
-			console.log("Update item with id = " + id);
-			updateList();
-		});
+		var valid = validateItem(currentItem);
+	
+		if (valid) {
+			var id = currentItem._id;
+			Items.update({ itemId: id, name: currentItem.name, count: currentItem.count}, function(item) {
+				console.log("Update item with id = " + id);
+				updateList();
+			});
+		} else {
+			alert("Проверьте правильность изменённых данных!");
+		}
+		
+		return valid;
 	}
 	
 	$scope.deleteItem = function(id) {
@@ -122,8 +140,12 @@ controller('GreenListCtrl', ['$scope', 'Items', 'limits', function($scope, Items
 	
 	// *** Input validation ***
 	
-	// TODO: move to directive
-	$scope.validateName = function(name) {
+	function validateItem(item) {
+		return validateName(item.name) && validateCount(item.count);
+	};
+	
+	// validate name
+	function validateName(name) {
 		var length;
 		try {
 			length = limits.name.length;
@@ -137,8 +159,8 @@ controller('GreenListCtrl', ['$scope', 'Items', 'limits', function($scope, Items
 		return false;
 	};
 	
-	// TODO: move to directive
-	$scope.validateCount = function(count) {
+	// validate count
+	function validateCount(count) {
 		var max, min;
 		try {
 			min = limits.count.min;

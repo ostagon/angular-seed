@@ -59,8 +59,9 @@ angular.module('GreenListApp.directives', []).
 				
 				scope.saveItem = function() {
 					if (scope.editMode && scope.newItem) {
-						scope.save({ item: scope.newItem});
-						scope.toggleMode();
+						if (scope.save({ item: scope.newItem})) {
+							scope.toggleMode();
+						}
 					}
 				};
 			}
