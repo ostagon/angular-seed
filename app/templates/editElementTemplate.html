@@ -3,6 +3,7 @@
 		<span ng-click="toggleMode()">{{ item[field] }}</span>
 	</div>
 	<div ng-if="editMode">
-		<input ng-model="newItem[field]" type="text" /><button ng-click="saveItem()">+</button><button ng-click="toggleMode()">X</button>
-	</div>
+		<input ng-model="newItem[field]" type="text" />
+		<button ng-click="saveItem()">+</button><button ng-click="toggleMode()">X</button>
+	</div>	
 </div>

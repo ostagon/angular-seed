@@ -16,7 +16,6 @@ angular.module('GreenListApp.directives', []).
 			replace: true,
 			scope: {
 				hint: "@",
-				variants: "=",
 				ngModel: "="
 			},
 			templateUrl: "templates/autocompleteTemplate.html",
@@ -46,7 +45,7 @@ angular.module('GreenListApp.directives', []).
 				field: "@",
 				save: "&"
 			},
-			templateUrl: "templates/editElementTemplate.html",
+			templateUrl: "templates/editTemplate.html",
 			link: function(scope, element, attrs) {
 				scope.editMode = false;
 				scope.newItem = {};
@@ -66,4 +65,36 @@ angular.module('GreenListApp.directives', []).
 				};
 			}
 		};
-	});
+	}).
+	// for count input
+	directive('countInput', ['limits', function(limits) {
+		return {
+			restrict: "A",
+			scope: {
+				ngModel: "=",
+				allowEmpty: "@"
+			},			
+			link: function(scope, element, attrs) {
+				
+				scope.$watch('ngModel', function(newValue, oldValue) {
+					if (scope.allowEmpty) {
+						if (newValue) {
+							if ( newValue > limits.count.max || newValue < limits.count.min) {
+								scope.ngModel = oldValue;
+							}
+						} else {
+							scope.ngModel = "";
+						}
+					} else {
+						if (newValue) {
+							if ( newValue > limits.count.max || newValue < limits.count.min) {
+								scope.ngModel = oldValue;
+							}
+						} else {
+							scope.ngModel = limits.count.min;
+						}
+					}
+				});
+			}
+		};
+	}]);

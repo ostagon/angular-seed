@@ -18,16 +18,18 @@
 		</td>
 	</tr>
 	<tr class="clear-color">
-		<td class="filter">
-			<!-- <input type="text" ng-model="currentItem.name" placeholder="Фильтровать по имени..." /> -->
-			<input autocomplete ng-model="currentItem.name" hint="Фильтровать по имени..." variants="some" />
-		</td>
-		<td class="filter">
-			<input type="text" ng-model="currentItem.count" placeholder="Фильтровать по кол-ву..." />
-		</td>
-		<td>
-			<button ng-click="createItem()" title="Создать новый элемент">+</button>
-		</td>
+		<form name="itemForm">
+			<td class="filter">
+				<!-- <input type="text" ng-model="currentItem.name" placeholder="Фильтровать по имени..." /> -->
+				<input autocomplete ng-model="currentItem.name" hint="Фильтровать по имени..." />
+			</td>
+			<td class="filter">
+				<input type="number" ng-model="currentItem.count" count-input allow-empty="true" placeholder="Фильтровать по кол-ву..." />
+			</td>
+			<td>
+				<button ng-click="createItem()" ng-disabled="!itemForm.$valid" title="Создать новый элемент">+</button>
+			</td>
+		</form>
 	</tr>
 </table>
 <hr/>

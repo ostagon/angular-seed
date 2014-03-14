@@ -13,10 +13,11 @@ controller('SimpleCtrl', function() {
 }).
 
 /* Контроллер для списка покупок */
-controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
+controller('GreenListCtrl', ['$scope', 'Items', 'limits', function($scope, Items, limits) {
 	$scope.currentItem = {};
 	
-	// sorts
+	// *** Sorts ***
+	
 	$scope.defaultSortField = "name";
 	$scope.sortOrders = {
 		name: true,
@@ -27,6 +28,7 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 	// первая загрузка
 	updateList();
 	
+	// *** CRUD ***
 		
 	$scope.createItem = function() {
 		if($scope.currentItem) {
@@ -61,7 +63,7 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 	function updateList() {
 		$scope.items = Items.list();
 		$scope.currentItem.name = "";
-		$scope.currentItem.count = "";		
+		$scope.currentItem.count = undefined;		
 	};
 	
 	// сортировка по имени филда
@@ -85,7 +87,7 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 		}
 	};
 	
-	// paginate
+	// *** Paginate ***
 	
 	// номер текущей, c 1
 	$scope.pageNo = 1;
@@ -116,6 +118,38 @@ controller('GreenListCtrl', ['$scope', 'Items', function($scope, Items) {
 			if ($scope.pageNo > 1)
 				$scope.pageNo--;
 		}		
+	};
+	
+	// *** Input validation ***
+	
+	// TODO: move to directive
+	$scope.validateName = function(name) {
+		var length;
+		try {
+			length = limits.name.length;
+			if (name) {
+				var namel = name.toString().length;
+				return namel <= length && namel > 0;
+			}			
+		} catch (e) {
+			console.err("Problem to get validation limits");			
+		}
+		return false;
+	};
+	
+	// TODO: move to directive
+	$scope.validateCount = function(count) {
+		var max, min;
+		try {
+			min = limits.count.min;
+			max = limits.count.max;
+			if (count) {
+				return count >= min && count <= max;
+			}			
+		} catch (e) {
+			console.err("Problem to get validation limits");			
+		}
+		return false;
 	};
 	
 }]);

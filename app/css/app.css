@@ -61,7 +61,7 @@ table.items tr td input[type="text"] {
 	padding-left: 2px;
 }
 
-table.items tr td.filter input[type="text"] {
+table.items tr td.filter input {
 	width: 100%;
 	padding-left: 2px;
 }

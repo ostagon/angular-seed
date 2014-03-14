@@ -1,0 +1,11 @@
+<div>
+	<div ng-if="!editMode">
+		<span ng-click="toggleMode()">{{ item[field] }}</span>
+	</div>
+	<div ng-if="editMode">
+		<input ng-model="newItem[field]" type="text" ng-if="field == 'name'" />
+		<input ng-model="newItem[field]" type="number" ng-if="field == 'count'" count-input />
+		<button ng-click="saveItem()">+</button>
+		<button ng-click="toggleMode()">X</button>		
+	</div>
+</div>
