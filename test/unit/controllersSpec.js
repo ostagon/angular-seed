@@ -31,7 +31,7 @@ describe('GreenListCtrl', function(){
   
   it('should return 1 page for 10 total elements', function() {
   
-	var ctrl = $controllerConstructor("GreenListCtrl", { $scope: scope, Items: { list: function() { return [];}}});
+	var ctrl = $controllerConstructor("GreenListCtrl", { $scope: scope, Items: { list: function() { return [];}}, limits: { name: {length: 20}, count: {min: 1, max: 1000}}});
   
 	// vars
 	expect(scope.pageSize).toBe(10);	

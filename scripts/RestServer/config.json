@@ -4,7 +4,7 @@
 		"uri": "mongodb://epruizhw0117:27017/greenlist",
 		"options": {
 			"user": "user",
-			"pass": "user"
+			"pass": "user357"
 		},
 		"dbs": ["greenlist", "red", "yellow", "violet", "silver"]
 	}
