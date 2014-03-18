@@ -4,4 +4,4 @@ node_modules/
 tmp
 .DS_Store
 .idea
-test_out/unit.xml
+test_out
