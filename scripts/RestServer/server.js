@@ -11,9 +11,6 @@ app.use(express.logger('dev'));   	 // выводим все запросы со
 app.use(express.json());         	 // стандартный модуль, для парсинга JSON в запросах
 app.use(express.urlencoded());
 app.use(require('formidable')());    // mimeencoded
-//app.use(express.methodOverride()); // поддержка put и delete
-//app.use(app.router);               // модуль для простого задания обработчиков путей
-//app.use(express.static(path.join(__dirname, "public")));
 
 /* Items Model */
 var ItemModel = mongoose.ItemModel;
@@ -43,13 +40,40 @@ app.get('/restapi', function (req, res) {
     res.send({ status: 'API is running'});
 });
 
+// get origin ip
+var getClientIp = function(req) {
+  var ipAddress = null;
+  var forwardedIpsStr = req.headers['x-forwarded-for'];
+  if (forwardedIpsStr) {
+    ipAddress = forwardedIpsStr[0];
+  }
+  if (!ipAddress) {
+    ipAddress = req.connection.remoteAddress;
+  }
+  return ipAddress;
+};
+
+// check for white list for ips
+var checkAllowOrigins = function(req, res, next) {
+	
+}
+
 // add headers to every rest api response (fix with CORS)
 var cors = function (req, res, next) {
+	// log origin ip
+	console.log('Origin: ' + getClientIp(req));
+	// add headers
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	next();
 };
+
+// all functions for pre restapi
+var preRest = function (req, res, next) {
+	checkAllowOrigins(req, res, 
+	cors(req, res, next));
+}
 
 app.all('/restapi/*', cors);
 
